@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [HideInInspector]public Rigidbody2D rb2d;
+    public float speed = 10f;
+    public Vector2 initialDirection = new Vector2(1, 1);
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        rb2d = GetComponent<Rigidbody2D>();
+        rb2d.velocity = initialDirection.normalized * speed;
     }
 }
