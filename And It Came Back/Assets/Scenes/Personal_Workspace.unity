@@ -449,7 +449,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  player: {fileID: 859675198}
   cam: {fileID: 968881447}
 --- !u!212 &859675195
 SpriteRenderer:
@@ -577,7 +576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 825181234}
-  bulletPrefab: {fileID: 4455951478521278478, guid: b0ce9351891512041858815edf5609a5, type: 3}
+  bulletPrefab: {fileID: 5381422611841834122, guid: a01ad1e6f357d614ebce59d107db90be, type: 3}
   bulletForce: 20
 --- !u!1 &968881445
 GameObject:

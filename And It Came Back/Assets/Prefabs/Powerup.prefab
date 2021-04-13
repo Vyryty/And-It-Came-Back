@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1194045741628302877}
   - component: {fileID: 7577267453466326543}
   - component: {fileID: 3773378384021190408}
-  - component: {fileID: 690618834445950438}
+  - component: {fileID: 2596963036958986422}
   m_Layer: 0
   m_Name: Powerup
   m_TagString: Powerup
@@ -115,7 +115,7 @@ PolygonCollider2D:
       - {x: 0, y: 0.5}
       - {x: -0.43, y: 0.25}
       - {x: -0.43, y: -0.25}
---- !u!114 &690618834445950438
+--- !u!114 &2596963036958986422
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,6 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 808935d49acc1b346ab1db8e658c66eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 4455951478521278478, guid: b0ce9351891512041858815edf5609a5, type: 3}
+  bulletPrefab: {fileID: 5381422611841834122, guid: a01ad1e6f357d614ebce59d107db90be, type: 3}
   type: 0
   tripleSpread: 30
