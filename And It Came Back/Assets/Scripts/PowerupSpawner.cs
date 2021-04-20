@@ -5,10 +5,12 @@ using UnityEngine;
 public class PowerupSpawner : MonoBehaviour
 {
     public GameObject powerupPrefab;
-    public int spawnCooldown = 1000;    //Time (in frames) until the next powerup spawns
-    private int timeUntilSpawn = 0;     //Time until the next powerup spawns
-    private Transform[] locations;      //The transforms of each powerup spawner; index 0 is the powerup spawner controller
+    public float spawnCooldown = 5f;    //Time (in seconds) until the next powerup spawns
+    public Transform[] locations;      //The transforms of each powerup spawner; index 0 is the powerup spawner controller
+    private float timeUntilSpawn = 0;     //Time until the next powerup spawns
     private int numLocations;           //The number of powerup spawners
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -17,10 +19,15 @@ public class PowerupSpawner : MonoBehaviour
         numLocations = locations.Length;
     }
 
+
+
     // FixedUpdate is called once per physics frame
     void FixedUpdate()
     {
-        timeUntilSpawn++;
+        timeUntilSpawn += Time.deltaTime;
+
+
+
         //When it is time for a powerup to spawn
         if (timeUntilSpawn >= spawnCooldown) {
             //Tries to spawn a powerup at an empty random powerup spawner
@@ -33,7 +40,7 @@ public class PowerupSpawner : MonoBehaviour
                     //Spawn a powerup at this location
                     GameObject powerup = Instantiate(powerupPrefab, locations[locIndex].position, Quaternion.identity, locations[locIndex]);
                     //Set the powerup to have a random type
-                    powerup.GetComponent<Powerup>().type = (Powerup.PowerupType)Random.Range(0, (int)Powerup.PowerupType.NA);
+                    powerup.GetComponent<Powerup>().type = (PowerupType)Random.Range(0, (int)PowerupType.NA);
                     //Set the powerup's name for easy identifiability
                     powerup.name = "powerup (" + powerup.GetComponent<Powerup>().type + ")";
                     spawned = true;

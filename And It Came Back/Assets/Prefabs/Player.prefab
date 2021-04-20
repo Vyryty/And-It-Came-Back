@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3872565143044863204}
   - component: {fileID: 1988229854}
   - component: {fileID: 56682363343792348}
-  - component: {fileID: 6053516014866169857}
+  - component: {fileID: 2008726922}
+  - component: {fileID: 1138251345}
   m_Layer: 0
-  m_Name: PlayerPrefab
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,10 +52,10 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: f0965ac7da36dc246943c2a3086225e2, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!114 &56682363343792348
 MonoBehaviour:
@@ -71,7 +72,12 @@ MonoBehaviour:
   firingArm: {fileID: 3706967014005606819}
   cam: {fileID: 0}
   moveSpeed: 8
---- !u!114 &6053516014866169857
+  health: 3
+  weapon: 0
+  powerupScript: {fileID: 0}
+  firePoint: {fileID: 3367186426788413343}
+  bulletPrefab: {fileID: 5381422611841834122, guid: a01ad1e6f357d614ebce59d107db90be, type: 3}
+--- !u!114 &2008726922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,12 +86,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 1572237345296147449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 219061e915d9a8a4d89f77beb8eefe56, type: 3}
+  m_Script: {fileID: 11500000, guid: b9a8024013c82154da9b85a33763a9a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 3367186426788413343}
-  bulletPrefab: {fileID: 5381422611841834122, guid: a01ad1e6f357d614ebce59d107db90be, type: 3}
-  bulletForce: 20
+  currentPower: 6
+  powerupTimer: 0
+--- !u!61 &1138251345
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572237345296147449}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.75, y: 0.9}
+  m_EdgeRadius: 0
 --- !u!1 &1680003524178422037
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +271,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5074538112107017531}
   - component: {fileID: 8279543288788482522}
-  - component: {fileID: 6285988042312984290}
   m_Layer: 0
   m_Name: BodySprite
   m_TagString: Player
@@ -313,29 +343,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6285988042312984290
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4637071025404438878}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: f0965ac7da36dc246943c2a3086225e2, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.9}
-  m_EdgeRadius: 0

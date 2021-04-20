@@ -2,16 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Powerup : MonoBehaviour
 {
-    //The types that a powerup can be; NA is 'not applicable' and should only be used outside of the powerup itself
-    public enum PowerupType { Triple, Auto, Bomb, Laser, Shield, Life, NA }
     public GameObject bulletPrefab;
 
     public PowerupType type;
-    public float tripleSpread = 30f;    //How much the triple spreads in degrees
+    public static float[] powerupTimers = new float[(int)PowerupType.NA];
 
-    //Activate the powerup on the given object
+
+
+    private void Start()
+    {
+        powerupTimers[(int)PowerupType.Triple] = 5f;
+        powerupTimers[(int)PowerupType.Auto] = 5f;
+    }
+
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        PowerAttribute powerScript;
+        bool okay = collision.TryGetComponent<PowerAttribute>(out powerScript);
+        Debug.Log(okay);
+
+        if (okay)
+        {
+            powerScript.currentPower = type;
+            powerScript.powerupTimer = powerupTimers[(int)type];
+
+            // Play a sound!
+            Destroy(gameObject);
+        }
+    }
+
+    /*//Activate the powerup on the given object
     public void activate(GameObject obj)
     {
         Debug.Log("Powerup hit (type=" + type.ToString() + ")");
@@ -39,17 +65,22 @@ public class Powerup : MonoBehaviour
                 Debug.Log("Powerup type not handled/set");
                 break;
         }
+
+        // Play powerup sound
         Destroy(this.gameObject);
     }
+
+
 
     private void activateTriple(GameObject obj)
     {
         //Activate the powerup on a player
-        if (obj.tag == "Player") {
+        if (obj.tag == "Player")
+        {
             
         }
-        //Activate the powerup on a bullet
-        else {
+        else       //Activate the powerup on a bullet
+        {
             //Find the vector perpendicular to the bullet's movement
             Vector3 velocity = obj.GetComponent<Rigidbody2D>().velocity;
             Vector3 perpendicular = Vector3.Cross(velocity, Vector3.back).normalized * .5f;
@@ -70,6 +101,8 @@ public class Powerup : MonoBehaviour
         }
     }
 
+
+
     private void activateAuto(GameObject obj)
     {
         //Activate the powerup on a player
@@ -80,5 +113,5 @@ public class Powerup : MonoBehaviour
         else {
             obj.GetComponent<BulletBehavior>().multSpeed(2f);
         }
-    }
+    }*/
 }
