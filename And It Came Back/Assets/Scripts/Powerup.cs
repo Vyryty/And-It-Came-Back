@@ -2,24 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Powerup : MonoBehaviour
 {
-    //The types that a powerup can be; NA is 'not applicable' and should only be used outside of the powerup itself
-    public enum PowerupType { Triple, Auto, Bomb, Laser, Shield, Life, NA }
-    public PowerupType type;                    //The type of the powerup
     public GameObject bulletPrefab;
 
-    //Activate the powerup on a bullet
+    public PowerupType type;
+    public static float[] powerupTimers = new float[(int)PowerupType.NA];
+
+
+
+    private void Start()
+    {
+        powerupTimers[(int)PowerupType.Triple] = 5f;
+        powerupTimers[(int)PowerupType.Auto] = 5f;
+    }
+
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        PowerAttribute powerScript;
+        bool okay = collision.TryGetComponent<PowerAttribute>(out powerScript);
+        Debug.Log("Able to trigger powerup: " + okay);
+
+        if (okay)
+        {
+            powerScript.currentPower = type;
+            powerScript.powerupTimer = powerupTimers[(int)type];
+
+            // Play a sound!
+            Destroy(gameObject);
+        }
+    }
+
+    /*//Activate the powerup on the given object
     public void activate(GameObject obj)
     {
         Debug.Log("Powerup hit (type=" + type.ToString() + ")");
         switch (type)
         {
             case PowerupType.Triple:
-                activateTripleBullet(obj, bulletPrefab);
+                activateTriple(obj);
                 break;
             case PowerupType.Auto:
-                activateAutoBullet(obj);
+                activateAuto(obj);
                 break;
             case PowerupType.Bomb:
                 //activate...
@@ -37,38 +65,53 @@ public class Powerup : MonoBehaviour
                 Debug.Log("Powerup type not handled/set");
                 break;
         }
+
+        // Play powerup sound
         Destroy(this.gameObject);
     }
 
-    private static void activateTripleBullet(GameObject obj, GameObject bulletPrefab)
+
+
+    private void activateTriple(GameObject obj)
     {
-        //Find the vector perpendicular to the bullet's movement
-        Vector3 velocity = obj.GetComponent<Rigidbody2D>().velocity;
-        Vector3 perpendicular = Vector3.Cross(velocity, Vector3.back).normalized * .5f;
+        //Activate the powerup on a player
+        if (obj.tag == "Player")
+        {
+            
+        }
+        else       //Activate the powerup on a bullet
+        {
+            //Find the vector perpendicular to the bullet's movement
+            Vector3 velocity = obj.GetComponent<Rigidbody2D>().velocity;
+            Vector3 perpendicular = Vector3.Cross(velocity, Vector3.back).normalized * .5f;
 
-        //Create a new bullet angling out from the right side
-        GameObject rightBullet = Instantiate(bulletPrefab);
-        rightBullet.transform.position = obj.transform.position + perpendicular;
-        rightBullet.GetComponent<Rigidbody2D>().AddForce(
-            Quaternion.Euler(0f, 0f, 30f) * velocity,
-            ForceMode2D.Impulse);
+            //Create a new bullet angling out from the right side
+            GameObject rightBullet = Instantiate(bulletPrefab);
+            rightBullet.transform.position = obj.transform.position + perpendicular;
+            rightBullet.GetComponent<Rigidbody2D>().AddForce(
+                Quaternion.Euler(0f, 0f, tripleSpread) * velocity,
+                ForceMode2D.Impulse);
 
-        //Repeat for the left side
-        GameObject leftBullet = Instantiate(bulletPrefab);
-        leftBullet.transform.position = obj.transform.position - perpendicular;
-        leftBullet.GetComponent<Rigidbody2D>().AddForce(
-            Quaternion.Euler(0f, 0f, -30f) * velocity,
-            ForceMode2D.Impulse);
+            //Repeat for the left side
+            GameObject leftBullet = Instantiate(bulletPrefab);
+            leftBullet.transform.position = obj.transform.position - perpendicular;
+            leftBullet.GetComponent<Rigidbody2D>().AddForce(
+                Quaternion.Euler(0f, 0f, -tripleSpread) * velocity,
+                ForceMode2D.Impulse);
+        }
     }
 
-    private void activateAutoBullet(GameObject obj)
-    {
-        obj.GetComponent<BulletBehavior>().multSpeed(2f);
-    }
 
-    public static void activateTriplePlayer(GameObject player, GameObject bulletPrefab)
+
+    private void activateAuto(GameObject obj)
     {
-        //Shoots a normal bullet, then activate a triple shot on it
-        activateTripleBullet(player.GetComponent<Shooting>().ShootNormal(), bulletPrefab);
-    }
+        //Activate the powerup on a player
+        if (obj.tag == "Player") {
+
+        }
+        //Activate the powerup on a bullet
+        else {
+            obj.GetComponent<BulletBehavior>().multSpeed(2f);
+        }
+    }*/
 }
