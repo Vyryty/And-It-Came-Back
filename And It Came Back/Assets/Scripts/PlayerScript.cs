@@ -94,6 +94,14 @@ public class PlayerScript : MonoBehaviour
                 }
                 break;
             
+            case PowerupType.Triple:
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    Shoot();
+                    powerupScript.powerupTimer--;
+                }
+                break;
+            
             default:
                 //No powerup: if the fire button is pressed, shoot a bullet
                 if (Input.GetButtonDown("Fire1"))

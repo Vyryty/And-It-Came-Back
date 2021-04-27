@@ -1344,7 +1344,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupPrefab: {fileID: 1194045741628302873, guid: b3e64b34dc49dd64094ba75b9e3af236, type: 3}
-  spawnCooldown: 300
+  spawnCooldown: 3
+  locations: []
 --- !u!1 &1185818302
 GameObject:
   m_ObjectHideFlags: 0

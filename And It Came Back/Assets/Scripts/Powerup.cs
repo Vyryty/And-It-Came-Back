@@ -9,13 +9,16 @@ public class Powerup : MonoBehaviour
     public GameObject bulletPrefab;
 
     public PowerupType type;
-    public static float[] powerupTimers = new float[(int)PowerupType.NA];
-
+    public static bool[] powerupTimersTypes = new bool[(int)PowerupType.NA];    //How powerupTimers should be interpretted by PowerAttribute
+    public static float[] powerupTimers = new float[(int)PowerupType.NA];       //The time that the powerup should last
 
 
     private void Start()
     {
+        powerupTimersTypes[(int)PowerupType.Triple] = false;
         powerupTimers[(int)PowerupType.Triple] = 5f;
+
+        powerupTimersTypes[(int)PowerupType.Auto] = true;
         powerupTimers[(int)PowerupType.Auto] = 5f;
     }
 
@@ -30,6 +33,7 @@ public class Powerup : MonoBehaviour
         if (okay)
         {
             powerScript.currentPower = type;
+            powerScript.useTimer = powerupTimersTypes[(int)type];
             powerScript.powerupTimer = powerupTimers[(int)type];
 
             // Play a sound!

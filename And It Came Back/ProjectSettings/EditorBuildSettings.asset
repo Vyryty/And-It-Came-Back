@@ -9,12 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Start_Menu.unity
     guid: d1eb4be2001e6d247b791abe8d2a061e
   - enabled: 1
-    path: Assets/Scenes/TestLevelScene.unity
-    guid: a17cdd741e0c76945b9d27313fd11a79
-  - enabled: 1
-    path: Assets/Scenes/Map2.unity
-    guid: 08bbc59a9d423364b8569da03a99b975
-  - enabled: 1
-    path: Assets/Scenes/Map3.unity
-    guid: 13b72071d38d5864b8c148309c56c006
+    path: Assets/Scenes/Powerup_Testing.unity
+    guid: 54b229f1222fd7f44ba0ff012cb2fe86
   m_configObjects: {}
