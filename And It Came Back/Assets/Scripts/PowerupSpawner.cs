@@ -26,8 +26,6 @@ public class PowerupSpawner : MonoBehaviour
     {
         timeUntilSpawn += Time.deltaTime;
 
-
-
         //When it is time for a powerup to spawn
         if (timeUntilSpawn >= spawnCooldown) {
             //Tries to spawn a powerup at an empty random powerup spawner

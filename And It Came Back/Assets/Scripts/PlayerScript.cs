@@ -16,7 +16,7 @@ public class PlayerScript : MonoBehaviour
     public Gun weapon = Gun.Revolver;
     private float bulletVelocity;
     private float autoFireRate;
-    private float shootingSpeed;
+    private float shootingSpeed = 0;
 
     [HideInInspector]public PowerAttribute powerupScript;
     [HideInInspector]Rigidbody2D rb2d;               //The rigidbody component of the player
@@ -38,7 +38,6 @@ public class PlayerScript : MonoBehaviour
             default:
                 bulletVelocity = 20f;
                 autoFireRate = .1f;
-                shootingSpeed = autoFireRate;
                 break;
         }
     }
@@ -49,11 +48,12 @@ public class PlayerScript : MonoBehaviour
         // Get axes position input.
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+        movement.Normalize();
 
         // Get mouse input.
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         float left = mousePos.x - transform.position.x;
-
+        // Animate the player when they change direction
         if (left < 0)
         {
             Vector2 temp = Vector2.Lerp(transform.localScale, new Vector2(-1, transform.localScale.y), Mathf.Abs(turned / turnSpeed));
@@ -80,22 +80,29 @@ public class PlayerScript : MonoBehaviour
         else
             turned = turnSpeed;
 
-        if (powerupScript.currentPower == PowerupType.Auto && Input.GetButton("Fire1"))
+        //Handle powerups that activate when shooting
+        switch (powerupScript.currentPower)
         {
-            if (shootingSpeed <= 0)
-            {
-                Shoot();
-                shootingSpeed = autoFireRate;
-            }
-            else
-            {
+            case PowerupType.Auto:
+                //Auto Powerup: Count down the cooldown
                 shootingSpeed -= Time.deltaTime;
-            }
+                // If the fire button is held and timer is off cooldown, shoot a bullet and reset the cooldown
+                if (shootingSpeed <= 0 && Input.GetButton("Fire1"))
+                {
+                    Shoot();
+                    shootingSpeed = autoFireRate;
+                }
+                break;
+            
+            default:
+                //No powerup: if the fire button is pressed, shoot a bullet
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    Shoot();
+                }
+                break;
         }
-        else if (Input.GetButtonDown("Fire1"))
-        {
-            Shoot();
-        }
+        
     }
 
     // FixedUpdate is called once per physics frame
