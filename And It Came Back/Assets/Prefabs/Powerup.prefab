@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1194045741628302877}
   - component: {fileID: 7577267453466326543}
-  - component: {fileID: 3773378384021190408}
-  - component: {fileID: 5733196813289799112}
+  - component: {fileID: 7438328489737102552}
+  - component: {fileID: 2596963036958986422}
   m_Layer: 0
   m_Name: Powerup
   m_TagString: Powerup
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1194045741628302873}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2135585597343286014, guid: 4b2a04fdbe0ef4d8da8f90eaca817cd1, type: 3}
-  m_Color: {r: 0.5896226, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5feec26548076c4418b1ec61297c8054, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,8 +84,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &3773378384021190408
-PolygonCollider2D:
+--- !u!61 &7438328489737102552
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -97,25 +97,20 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.03, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8828125, y: 1}
+    oldSize: {x: 3.125, y: 3.125}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: -0.5}
-      - {x: 0.43, y: -0.25}
-      - {x: 0.43, y: 0.25}
-      - {x: 0, y: 0.5}
-      - {x: -0.43, y: 0.25}
-      - {x: -0.43, y: -0.25}
---- !u!114 &5733196813289799112
+  serializedVersion: 2
+  m_Size: {x: 0.66, y: 0.86}
+  m_EdgeRadius: 0
+--- !u!114 &2596963036958986422
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,5 +122,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 808935d49acc1b346ab1db8e658c66eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
   bulletPrefab: {fileID: 5381422611841834122, guid: a01ad1e6f357d614ebce59d107db90be, type: 3}
+  type: 0
