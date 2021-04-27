@@ -25,7 +25,7 @@ public class Powerup : MonoBehaviour
     {
         PowerAttribute powerScript;
         bool okay = collision.TryGetComponent<PowerAttribute>(out powerScript);
-        Debug.Log(okay);
+        Debug.Log("Able to trigger powerup: " + okay);
 
         if (okay)
         {
